@@ -71,20 +71,8 @@ ul {
 
 .responsive-object {
   position: relative;
-/*   padding-bottom: 67.5%;
-  height: 0;
-  margin: 10px 0;
-  overflow: hidden; */
   padding-top: 56.25%;
 }
-
-/* .responsive-object iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-} */
 
 
 iframe {
