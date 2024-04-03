@@ -87,6 +87,20 @@ iframe {
   font-size: smaller;
 }
 
+details {
+  margin-bottom: 1rem;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.2rem;
+}
+
+details[open] summary {
+  margin-bottom: 0.5rem;
+}
+
 /* Page structure */
 .wrapper {
   min-height: var(--wrapper-height);
