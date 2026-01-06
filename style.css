@@ -120,22 +120,70 @@ footer {
   font-size: smaller;
 }
 
+/* For animating open/close */
 details {
   margin-bottom: 1rem;
+  overflow: hidden;
+  /* Allow transitions between numeric values and keywords */
+  interpolate-size: allow-keywords;
 }
 
-summary {
-  cursor: pointer;
-  font-weight: bold;
-  padding: 0.2rem;
+details::details-content {
+  block-size: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details::details-content {
+    transition: block-size 0.5s ease-in-out,
+                content-visibility 0.5s ease-in-out;
+    /* Allow animation on properties like `display`, which is either `none` or `block` */
+    transition-behavior: allow-discrete;
+  }
+}
+
+details[open]::details-content {
+  block-size: auto;
 }
 
 details[open] summary {
   margin-bottom: 0.5rem;
 }
 
+/* For animating the summary "marker" */
 summary::marker {
+  content: none; /* Hide marker for Modern browsers */
+}
+
+summary::-webkit-details-marker {
+  display: none; /* Hide marker for WebKit browsers */
+}
+
+summary {
+  list-style: none; /* Hide marker for WebKit browsers, fallback */
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.2rem;
+  position: relative;
+  padding-inline-start: 1.5rem;
+}
+
+summary::before {
+  content: '▶'; /* Replace marker so it can be animated */
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.2rem;
+  font-size: 0.9em;
   color: var(--surround-color);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  summary::before {
+    transition: rotate 0.5s ease-in-out;
+  }
+}
+
+details[open] > summary::before {
+  rotate: 90deg;
 }
 
 /* Page structure */
